@@ -30,7 +30,7 @@ export default HomeMain;
 
 const StyledHomeMain = styled.main`
   position: relative;
-  z-index: -3;
+  z-index: 1;
   img {
     position: absolute;
     width: 300px;

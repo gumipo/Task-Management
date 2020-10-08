@@ -12,7 +12,7 @@ const App = () => {
   const isSignedIn = getIsSignedIn(selector);
   return (
     <React.Fragment>
-      <main style={{ backgroundColor: "rgba(0,255,43,0.08)" }}>
+      <main style={{ backgroundColor: "rgba(0,255,43,0.085)" }}>
         {!isSignedIn ? <Header /> : <DrawerHeader />}
         <Router />
       </main>

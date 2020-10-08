@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserIcon } from "../../Redux/Users/selector";
@@ -59,10 +59,6 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
   },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
 }));
 
 const DrawerHeader = (props) => {
@@ -73,7 +69,7 @@ const DrawerHeader = (props) => {
   const selector = useSelector((state) => state);
   const icon = getUserIcon(selector);
 
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const selectMenu = (path) => {
     dispatch(push(path));
@@ -85,21 +81,21 @@ const DrawerHeader = (props) => {
       label: "プロフィール",
       icon: <PersonIcon />,
       id: "register",
-      value: "/product/edit",
+      value: "/profile",
     },
     {
       func: selectMenu,
       label: "タスクの作成",
       icon: <AddCircleIcon />,
       id: "profile",
-      value: "/user/mypage",
+      value: "/task/create",
     },
     {
       func: selectMenu,
       label: "これまでのタスク",
       icon: <HistoryIcon />,
       id: "history",
-      value: "/order/history",
+      value: "/task/history",
     },
   ];
 
@@ -113,11 +109,7 @@ const DrawerHeader = (props) => {
       <Divider />
       <List>
         {menus.map((menu) => (
-          <ListItem
-            button
-            key={menu.id}
-            onClick={(event) => menu.func(event, menu.value)}
-          >
+          <ListItem button key={menu.id} onClick={() => menu.func(menu.value)}>
             <ListItemIcon>{menu.icon}</ListItemIcon>
             <ListItemText primary={menu.label} />
           </ListItem>
@@ -126,7 +118,7 @@ const DrawerHeader = (props) => {
           <ListItemIcon>
             <ExitToAppIcon />
           </ListItemIcon>
-          <ListItemText primary={"Logout"} />
+          <ListItemText primary={"ログアウト"} />
         </ListItem>
         <Divider />
       </List>
@@ -141,7 +133,6 @@ const DrawerHeader = (props) => {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          {/* ドロワーアイコン */}
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -151,11 +142,12 @@ const DrawerHeader = (props) => {
           >
             <MenuIcon />
           </IconButton>
-
-          <Typography className={classes.headerlayout} variant="h6" noWrap>
+          <Typography variant="h6" noWrap>
             <StyledHeader>
-              <h1>Lograr</h1>
-              <img src={logo} alt="lograr-logo" />
+              <StyledHeaderLogo>
+                <h1>Lograr</h1>
+                <img src={logo} alt="lograr-logo" />
+              </StyledHeaderLogo>
               <StyledUserIcon>
                 <img src={icon} alt="usericon" />
               </StyledUserIcon>
@@ -194,9 +186,6 @@ const DrawerHeader = (props) => {
           </Drawer>
         </Hidden>
       </nav>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-      </main>
     </div>
   );
 };
@@ -204,6 +193,11 @@ const DrawerHeader = (props) => {
 export default DrawerHeader;
 
 const StyledHeader = styled.header`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledHeaderLogo = styled.div`
   display: flex;
   align-items: center;
   h1 {

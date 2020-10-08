@@ -142,7 +142,7 @@ export const resetPassword = (email) => {
 export const twitterLogin = () => {
   return async (dispatch) => {
     const provider = new firebase.auth.TwitterAuthProvider();
-    firebase.auth().languageCode = "pt";
+    firebase.auth().languageCode = "ja";
     provider.setCustomParameters({
       lang: "es",
     });
@@ -184,7 +184,7 @@ export const twitterLogin = () => {
 export const googleLogin = () => {
   return (dispatch) => {
     const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().languageCode = "pt";
+    firebase.auth().languageCode = "ja";
     provider.setCustomParameters({
       login_hint: "user@example.com",
     });

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { getUserIcon, getUserId, getUserName } from "../Redux/Users/selector";
+import {
+  getUserIcon,
+  getUserId,
+  getUserName,
+} from "../.././Redux/Users/selector";
 
 const CreateProfile = () => {
   const selector = useSelector((state) => state);
@@ -16,16 +20,16 @@ const CreateProfile = () => {
       <h1>{userName + "さんLograrへようこそ"}</h1>
       <h1>まずプロフィールを作成しよう</h1>
       <img src={icon} alt="usericon" />
-
       <p>お名前</p>
       <input defaultValue={userName} />
       <h2>希望の職種</h2>
-
       <p>フロントエンドエンジニア</p>
       <p>バックエンドエンジニア</p>
       <h2>習得済みの言語</h2>
-
       <h2>現在学習中の言語</h2>
+      <h2>すでに学習中であれば作成してきたもの</h2>
+      <h2>キータのアカウント</h2>
+      <h2>GitHubアカウント</h2>
     </StyledSection>
   );
 };
@@ -35,7 +39,7 @@ export default CreateProfile;
 const StyledSection = styled.section`
   width: 700px;
   padding-top: 20px;
-  margin: 0 400px;
+  margin: 70px 400px;
 
   img {
     width: 150px;

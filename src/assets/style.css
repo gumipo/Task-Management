@@ -1,0 +1,7 @@
+.text-hover:hover {
+  background-color: green;
+}
+
+html {
+  background-color: rgba(0, 255, 43, 0.08);
+}
