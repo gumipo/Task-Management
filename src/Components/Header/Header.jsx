@@ -1,23 +1,40 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getIsSignedIn,
+  getUserIcon,
+  getUserName,
+} from "../../Redux/Users/selector";
 import { push } from "connected-react-router";
 import styled from "styled-components";
 import logo from "../../assets/Image/Lograr-logo.png";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
+  const isSignedIn = getIsSignedIn(selector);
+  const icon = getUserIcon(selector);
+  const userName = getUserName(selector);
+
   return (
     <StyledHeader>
       <StyledHeaderTitle onClick={() => dispatch(push("/"))}>
         Lograr
         <img src={logo} alt="lograr" />
       </StyledHeaderTitle>
-      <StyledHeaderNav>
-        <ul>
-          <li onClick={() => dispatch(push("/login"))}>ログイン</li>
-          <li>アカウント登録</li>
-        </ul>
-      </StyledHeaderNav>
+      {!isSignedIn ? (
+        <StyledHeaderNav>
+          <ul>
+            <li onClick={() => dispatch(push("/login"))}>ログイン</li>
+            <li onClick={() => dispatch(push("/signup"))}>アカウント登録</li>
+          </ul>
+        </StyledHeaderNav>
+      ) : (
+        <StyledHeaderUser>
+          <img src={icon} alt="usericon" />
+          <p>{userName}</p>
+        </StyledHeaderUser>
+      )}
     </StyledHeader>
   );
 };
@@ -74,5 +91,18 @@ const StyledHeaderNav = styled.nav`
         background-color: #ff8e8e;
       }
     }
+  }
+`;
+
+const StyledHeaderUser = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 100px;
+  img {
+    width: 34px;
+    height: 34px;
+    border-radius: 17px;
   }
 `;

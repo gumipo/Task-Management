@@ -1,13 +1,17 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import styled from "styled-components";
 import HomeImage from "../../assets/Image/to-do-list-not-css.svg";
 import Note from "../../assets/Image/Notes.png";
 import HomeMain from "./HomeMain";
+import { getIsSignedIn } from "../../Redux/Users/selector";
 
 const Home = () => {
+  const selector = useSelector((state) => state);
+  const isSignedIn = getIsSignedIn(selector);
   const dispatch = useDispatch();
+
   return (
     <StyledHome>
       <StyledHomeTop>
@@ -22,7 +26,15 @@ const Home = () => {
             他の人の学習ロードマップを参考にしてみよう。
           </p>
           <StyledButtonArea>
-            <button>今すぐ始める</button>
+            {!isSignedIn ? (
+              <button onClick={() => dispatch(push("/login"))}>
+                今すぐ始める
+              </button>
+            ) : (
+              <button onClick={() => dispatch(push("/profile/create"))}>
+                マイページへ
+              </button>
+            )}
           </StyledButtonArea>
           <img src={Note} alt="note" />
         </StyledTextArea>
