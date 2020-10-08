@@ -51,6 +51,8 @@ const StyledHeader = styled.header`
   align-items: center;
   justify-content: space-between;
   z-index: 30;
+  @media screen and (max-width: 767px) {
+  }
 `;
 
 const StyledHeaderTitle = styled.h1`
@@ -59,17 +61,33 @@ const StyledHeaderTitle = styled.h1`
   font-family: "Secular One", sans-serif;
   cursor: pointer;
 
+  @media screen and (max-width: 767px) {
+    font-size: 30px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+  }
+
   img {
     height: 60px;
     width: 60px;
+    @media screen and (max-width: 767px) {
+      width: 30px;
+      height: 30px;
+    }
   }
 `;
 
 const StyledHeaderNav = styled.nav`
   width: 400px;
   margin-right: 100px;
+
   ul {
     display: flex;
+    @media screen and (max-width: 767px) {
+      margin-left: 60px;
+    }
+
     li {
       margin: 10px;
       padding: 5px;
@@ -82,6 +100,10 @@ const StyledHeaderNav = styled.nav`
       flex: 1;
       border-radius: 30px;
       cursor: pointer;
+      @media screen and (max-width: 767px) {
+        width: 80px;
+        font-size: 10px;
+      }
 
       :hover {
         opacity: 0.7;

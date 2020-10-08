@@ -46,11 +46,9 @@ const Reset = () => {
 export default Reset;
 
 const StyledReset = styled.section`
-  height: 800px;
   margin: 70px auto;
-  padding: 30px;
+  padding-top: 30px;
   text-align: center;
-
   p {
     width: 300px;
     margin: 15px auto;
@@ -98,8 +96,8 @@ const StyledBox = styled.div`
   box-shadow: 0px 0px 17px 3px grey;
   background-color: white;
   margin-bottom: 10px;
-  @media screen and (max-width) {
-    width: 400px;
+  @media screen and (max-width: 767px) {
+    width: 350px;
   }
   h1 {
     font-size: 25px;
@@ -112,4 +110,7 @@ const StyledInputArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  @media screen and (max-width: 767px) {
+    width: 330px;
+  }
 `;

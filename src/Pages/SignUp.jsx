@@ -105,7 +105,7 @@ export default SignUp;
 
 const StyledSignUp = styled.section`
   margin: 70px auto;
-  padding: 30px;
+  padding-top: 30px;
   text-align: center;
 
   p {
@@ -115,9 +115,6 @@ const StyledSignUp = styled.section`
     :hover {
       color: blue;
     }
-  }
-  @media screen and (max-width: 767px) {
-    width: 350px;
   }
 
   button {
@@ -155,11 +152,15 @@ const StyledTextBox = styled.div`
   box-shadow: 0px 0px 17px 3px grey;
   background-color: white;
   margin-bottom: 30px;
-  @media screen and (max-width) {
-    width: 400px;
+  @media screen and (max-width: 767px) {
+    width: 350px;
+    height: 500px;
   }
   h1 {
     font-size: 25px;
+    @media screen and (max-width: 767px) {
+      font-size: 20px;
+    }
   }
 `;
 
@@ -170,4 +171,8 @@ const StyledTextInputArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  @media screen and (max-width: 767px) {
+    width: 300px;
+    height: 300px;
+  }
 `;

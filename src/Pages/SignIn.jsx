@@ -24,7 +24,7 @@ const SignIn = () => {
 
   return (
     <EmailLoginArea>
-      <h2 style={{ fontSize: 20 }}>メールアドレスでログイン</h2>
+      <h2>メールアドレスでログイン</h2>
       <TextInput
         fullWidth={true}
         label={"メールアドレス"}
@@ -60,6 +60,15 @@ const EmailLoginArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media screen and (max-width: 767px) {
+    width: 330px;
+  }
+  h2 {
+    font-size: 20px;
+    @media screen and (max-width: 767px) {
+      font-size: 18px;
+    }
+  }
 `;
 
 const LoginButton = styled.button`

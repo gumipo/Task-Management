@@ -52,9 +52,12 @@ export default Login;
 
 const StyledLogin = styled.section`
   margin: 70px auto;
-  padding: 30px;
+  padding-top: 30px;
   text-align: center;
-
+  @media screen and (max-width: 767px) {
+    width: 375px;
+    padding-top: 10px;
+  }
   p {
     width: 300px;
     margin: 15px auto;
@@ -62,9 +65,6 @@ const StyledLogin = styled.section`
     :hover {
       color: blue;
     }
-  }
-  @media screen and (max-width: 767px) {
-    width: 350px;
   }
 
   button {
@@ -109,11 +109,15 @@ const LoginButtonArea = styled.div`
   box-shadow: 0px 0px 17px 3px grey;
   background-color: white;
   margin-bottom: 10px;
-  @media screen and (max-width) {
-    width: 400px;
+  @media screen and (max-width: 767px) {
+    width: 360px;
+    height: 500px;
   }
   h1 {
     font-size: 25px;
+    @media screen and (max-width: 767px) {
+      font-size: 18px;
+    }
   }
 `;
 
