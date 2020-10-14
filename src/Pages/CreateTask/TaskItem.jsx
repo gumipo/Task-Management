@@ -1,40 +1,45 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
+import TaskDescription from "./TaskDescription";
+import DescriptionItem from "./DescriptionItem";
 
-const TaskItem = ({ task, index, addTask }) => {
-  const inputEl = useRef(null);
-  const [isEdit, setIsEdit] = useState(true);
-
+const TaskItem = ({ title, descriptions, setDescriptions }) => {
+  console.log(descriptions);
   return (
     <StyledTaskItem>
-      <StyledTaskTitle>{task.title}</StyledTaskTitle>
-      <p>学習する言語</p>
-
-      <p>学習の内容</p>
-
-      <StyledTextArea ref={inputEl} placeholder="学習内容"></StyledTextArea>
-      <button>編集する</button>
+      <StyledTaskTitle>{title}</StyledTaskTitle>
+      <DescriptionItem
+        descriptions={descriptions}
+        setDescriptions={setDescriptions}
+      />
+      {descriptions.length > 0 &&
+        descriptions.map((description, index) => (
+          <TaskDescription
+            key={index}
+            text={description.text}
+            time={description.time}
+            index={index}
+          />
+        ))}
     </StyledTaskItem>
   );
 };
 export default TaskItem;
 
 const StyledTaskItem = styled.div`
-  width: 500px;
-  padding: 30px;
-  margin: 10px auto;
-  border: 3px groove grey;
-`;
-
-const StyledTaskTitle = styled.h2`
-  background-color: #79ea3f;
-  border-radius: 40px;
-  font-size: 30px;
-  text-align: center;
-`;
-
-const StyledTextArea = styled.textarea`
-  width: 400px;
+  width: 800px;
   margin: 0 auto;
-  height: 200px;
+  height: 600px;
+  border: 2px dotted black;
+`;
+
+const StyledTaskTitle = styled.h1`
+  width: 500px;
+  margin: 30px auto;
+  border-radius: 25px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 30px;
+  background-color: navy;
+  color: white;
 `;

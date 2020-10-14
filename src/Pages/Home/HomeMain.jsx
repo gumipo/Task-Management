@@ -6,7 +6,7 @@ const HomeMain = () => {
   return (
     <StyledHomeMain>
       <img src={Question} alt="questionimage" />
-      <h2>『 エンジニアになる為にどういう手順で勉強すればいいの？ 』</h2>
+      <h2>エンジニアになる為にどういう手順で勉強すればいいの？</h2>
       <p>
         プログラミングを学習したいけど<br></br>
         何から始めたらいいかわからない...
@@ -46,6 +46,26 @@ const StyledHomeMain = styled.main`
     }
   }
   h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    ::before,
+    ::after {
+      content: "";
+      width: 50px;
+      height: 50px;
+    }
+    ::before {
+      margin: -30px 10px 0 0;
+      border-top: 10px solid #0277b4;
+      border-left: 10px solid #00a7ff;
+    }
+    ::after {
+      margin: 0 0 -30px 10px;
+      border-right: 10px solid #00a7ff;
+      border-bottom: 10px solid #0277b4;
+    }
     font-size: 30px;
     margin-bottom: 50px;
     @media screen and (max-width: 767px) {

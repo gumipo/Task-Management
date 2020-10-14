@@ -18,11 +18,15 @@ const Home = () => {
         <img src={HomeImage} alt="top image" />
         <StyledTextArea>
           <h1>
-            エンジニアを目指す人向けの<br></br>タスク管理サービス
+            エンジニアを目指す人向けの
+            <br />
+            <span>タスク管理サービス</span>
           </h1>
           <p>
-            エンジニアを目指す人の為の学習管理サービスです。<br></br>
-            Will,Can,Mustを捉えて毎日のタスクを考えよう。<br></br>
+            エンジニアを目指す人の為の学習管理サービスです。
+            <br />
+            <span>Will,Can,Must</span>を捉えて毎日のタスクを考えよう。
+            <br />
             他の人の学習ロードマップを参考にしてみよう。
           </p>
           <StyledButtonArea>
@@ -69,6 +73,9 @@ const StyledHomeTop = styled.div`
     font-size: 45px;
     font-weight: bold;
     color: #005e96;
+    span {
+      background: linear-gradient(transparent 70%, #e5bb09 70%);
+    }
     @media screen and (max-width: 767px) {
       font-size: 25px;
     }
@@ -87,6 +94,10 @@ const StyledTextArea = styled.div`
   margin-top: 50px;
   p {
     font-size: 18px;
+    span {
+      text-decoration: #e3bf00 wavy underline;
+      -webkit-text-decoration: #e3bf00 wavy underline;
+    }
     @media screen and (max-width: 767px) {
       font-size: 13px;
     }
