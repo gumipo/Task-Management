@@ -22,6 +22,15 @@ export const signOutAction = () => {
       role: "",
       username: "",
       icon: "",
+      usertask: [],
     },
+  };
+};
+
+export const FETCH_USER_TASK = "FETCH_USER_TASK";
+export const fetchUserTaskAction = (task) => {
+  return {
+    type: "FETCH_USER_TASK",
+    payload: task,
   };
 };

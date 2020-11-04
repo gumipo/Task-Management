@@ -1,95 +1,68 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { getUserIcon, getUserName } from "../.././Redux/Users/selector";
-import CheckBox from "./CheckBox";
-
-const jobList = ["フロントエンドエンジニア", "バックエンドエンジニア"];
-const flontCheckList = [
-  "HTML",
-  "CSS",
-  "Sass",
-  "javascript",
-  "vue.js",
-  "Nuxt.ja",
-  "React",
-  "Next.js",
-];
-const backCheckList = [
-  "Ruby",
-  "Ruby on Rails",
-  "PHP",
-  "Laravel",
-  "Python",
-  "Django",
-];
+import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
+import { storage } from "../../Firebase/index";
 
 const CreateProfile = () => {
   const selector = useSelector((state) => state);
   const userName = getUserName(selector);
   const icon = getUserIcon(selector);
 
-  const [jobCheckedItems, setJobCheckedItems] = useState({});
+  const changeIcon = useCallback((event) => {
+    const file = event.target.files;
+    let blob = new Blob(file, { type: "image/jpeg" });
 
-  const handleChange = (e) => {
-    setJobCheckedItems({
-      ...jobCheckedItems,
-      [e.target.id]: e.target.checked,
+    const S = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const N = 16;
+    const fileName = Array.from(crypto.getRandomValues(new Uint32Array(N)))
+      .map((n) => S[n % S.length])
+      .join("");
+
+    const uploadRef = storage.ref("images").child(fileName);
+    const uploadTask = uploadRef.put(blob);
+
+    uploadTask.then(() => {
+      //アップロードできたら
+      uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+        const newIcon = { id: fileName, path: downloadURL };
+      });
     });
-    console.log(jobCheckedItems);
-  };
-
-  const dataSendBtn = (e) => {
-    e.preventDefault();
-    const dataPushArray = Object.entries(jobCheckedItems).reduce(
-      (pre, [key, value]) => {
-        value && pre.push(key);
-        return pre;
-      },
-      []
-    );
-    console.log(dataPushArray);
-  };
+  }, []);
 
   return (
     <StyledSection>
-      <h1>{userName + "さんLograrへようこそ"}</h1>
-      <h1>まずプロフィールを作成しよう</h1>
-      <img src={icon} alt="usericon" />
-      <p>お名前</p>
-      <input defaultValue={userName} />
-      <h2>希望の職種</h2>
-      <form>
-        {jobList.map((item, index) => {
-          index = index + 1;
-          return (
-            <label htmlFor={`id_${index}`} key={`key_${index}`}>
-              {item}
-              <CheckBox
-                id={`id_${index}`}
-                value={item}
-                onChange={handleChange}
-                checked={jobCheckedItems[item.id]}
-              />
-            </label>
-          );
-        })}
-      </form>
+      <StyledTite>
+        <h1>
+          {userName + "さんLograrへようこそ"}
+          <br />
+          プロフィールを作成しよう
+        </h1>
+      </StyledTite>
+      <div className="p-grid__row">
+        <UserImage>
+          <img src={icon} alt="usericon" />
+          <label>
+            <StyledChangeIcon>
+              <PhotoCameraIcon />
+            </StyledChangeIcon>
+            <input type="file" id="image" onChange={(e) => changeIcon(e)} />
+          </label>
+        </UserImage>
 
-      <h2>学習してきた言語</h2>
-
-      <h2>現在学習中の言語</h2>
-
-      <h2>その他</h2>
-
-      <h2>これまでの成果物</h2>
-
-      <h2>キータのアカウント</h2>
-      <input placeholder="QiitaアカウントのUrl"></input>
-      <h2>GitHubアカウント</h2>
-      <input placeholder="gitHubアカウントUrl"></input>
-
-      <button onClick={dataSendBtn}> プロフィールを作成</button>
+        <ProfileInputArea>
+          <p>お名前</p>
+          <input type="text" defaultValue={userName} />
+          <h2>キータのアカウント</h2>
+          <input placeholder="QiitaアカウントのUrl"></input>
+          <h2>GitHubアカウント</h2>
+          <input placeholder="gitHubアカウントUrl"></input>
+        </ProfileInputArea>
+      </div>
+      <h2>自己紹介</h2>
+      <textarea type="text" />
+      <button> プロフィールを作成</button>
     </StyledSection>
   );
 };
@@ -97,21 +70,69 @@ const CreateProfile = () => {
 export default CreateProfile;
 
 const StyledSection = styled.section`
-  width: 700px;
-  padding-top: 20px;
-  margin: 70px 400px;
-
-  img {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto;
-    border-radius: 75px;
-  }
+  width: 1000px;
+  height: 100vh;
+  transform: translateX(150px);
+  margin: 70px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   h1 {
-    font-size: 33px;
+    font-size: 20px;
   }
   input {
     width: 300px;
     display: block;
+  }
+  textarea {
+    width: 100%;
+    height: 100px;
+  }
+  button {
+    margin-top: 30px;
+    width: 150px;
+    height: 50px;
+    background-color: navy;
+    color: white;
+    border-radius: 5px;
+    border: none;
+  }
+`;
+
+const StyledTite = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+`;
+
+const UserImage = styled.div`
+  position: relative;
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+  }
+`;
+
+const ProfileInputArea = styled.div`
+  margin: 40px;
+  input {
+    margin-bottom: 15px;
+  }
+`;
+
+const StyledChangeIcon = styled.div`
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: white;
+  :hover {
+    opacity: 0.7;
   }
 `;

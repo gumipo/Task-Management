@@ -17,3 +17,8 @@ export const getUserIcon = createSelector(
   [usersSelector],
   (state) => state.icon
 );
+
+export const getUserTask = createSelector(
+  [usersSelector],
+  (state) => state.usertask
+);

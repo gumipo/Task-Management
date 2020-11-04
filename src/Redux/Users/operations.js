@@ -1,8 +1,43 @@
 import { signInAction, signOutAction } from "./actions";
 import { push } from "connected-react-router";
+import { fetchUserTaskAction } from "../../Redux/Users/actions";
 //import firebase
 import { auth, FirebaseTimestamp, db } from "../../Firebase/index";
 import firebase from "firebase";
+
+//タスクの登録
+export const saveUserTask = (title, descriptions) => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid;
+    const userTaskRef = db
+      .collection("users")
+      .doc(uid)
+      .collection("usertask")
+      .doc();
+    const timestamp = FirebaseTimestamp.now().toDate();
+
+    const userTask = {
+      created_at: timestamp,
+      updated_at: timestamp,
+      title: title,
+      descriptions: descriptions,
+    };
+
+    userTask["usertaskId"] = userTaskRef.id;
+    userTaskRef.set(userTask);
+  };
+};
+
+//タスクを取り出す
+export const fetchUserTask = (usertask) => {
+  return async (dispatch) => {
+    if (usertask === undefined) {
+      dispatch(push("/profile"));
+    } else {
+      dispatch(fetchUserTaskAction(usertask));
+    }
+  };
+};
 
 //認証をリッスン
 export const listenAuthState = () => {
@@ -22,6 +57,7 @@ export const listenAuthState = () => {
                 role: data.role,
                 username: data.username,
                 icon: data.icon,
+                usertask: [],
               })
             );
           });
@@ -138,7 +174,7 @@ export const resetPassword = (email) => {
   };
 };
 
-//Twitterでログイン
+//Twitterで登録
 export const twitterLogin = () => {
   return async (dispatch) => {
     const provider = new firebase.auth.TwitterAuthProvider();
@@ -151,7 +187,6 @@ export const twitterLogin = () => {
       .auth()
       .signInWithPopup(provider)
       .then((result) => {
-        console.log(result);
         const user = result.user;
         const uid = user.uid;
         const email = user.email;
@@ -180,7 +215,7 @@ export const twitterLogin = () => {
   };
 };
 
-//googleでログイン
+//googleで登録
 export const googleLogin = () => {
   return (dispatch) => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -193,7 +228,6 @@ export const googleLogin = () => {
       .auth()
       .signInWithPopup(provider)
       .then((result) => {
-        console.log(result);
         const user = result.user;
         const icon = user.photoURL;
         const uid = user.uid;
@@ -221,7 +255,7 @@ export const googleLogin = () => {
   };
 };
 
-//gitHubでログイン
+//gitHubで登録
 export const gitHubLogin = () => {
   return (dispatch) => {
     const provider = new firebase.auth.GithubAuthProvider();
@@ -234,7 +268,6 @@ export const gitHubLogin = () => {
       .auth()
       .signInWithPopup(provider)
       .then((result) => {
-        console.log(result);
         const user = result.user;
         const icon = user.photoURL;
         const uid = user.uid;
@@ -267,7 +300,7 @@ export const signOut = () => {
   return async (dispatch) => {
     auth.signOut().then(() => {
       dispatch(signOutAction());
-      dispatch(push("/login"));
+      dispatch(push("/"));
     });
   };
 };

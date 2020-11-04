@@ -51,8 +51,9 @@ const Login = () => {
 export default Login;
 
 const StyledLogin = styled.section`
-  margin: 70px auto;
+  margin: 50px auto 0 auto;
   padding-top: 30px;
+
   text-align: center;
   @media screen and (max-width: 767px) {
     width: 375px;
@@ -100,7 +101,7 @@ const LayoutFlex = styled.div`
 const LoginButtonArea = styled.div`
   width: 500px;
   margin: 0 auto;
-  height: 700px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

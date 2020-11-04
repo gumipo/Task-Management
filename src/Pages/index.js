@@ -6,3 +6,5 @@ export { default as CreateProfile } from "./Profile/CreateProfile";
 export { default as Profile } from "./Profile/Profile";
 export { default as CreateTask } from "./CreateTask/CreateTask";
 export { default as TaskHistory } from ".././Pages/TaskHistory";
+export { default as NowTask } from "../Pages/NowTask/NowTask";
+export { default as MainCreateTask } from "../Pages/CreateTask/MainCreateTask";

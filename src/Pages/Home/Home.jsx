@@ -54,9 +54,10 @@ const StyledHome = styled.section`
   text-align: center;
   width: 1300px;
   margin: 40px auto;
+
   @media screen and (max-width: 767px) {
     width: 375px;
-    margin: 70px auto;
+    margin: 70px auto 0 auto;
   }
 `;
 
@@ -65,21 +66,12 @@ const StyledHomeTop = styled.div`
   display: flex;
   align-items: center;
   height: 900px;
+
   @media screen and (max-width: 767px) {
     flex-direction: column;
     height: 700px;
   }
-  h1 {
-    font-size: 45px;
-    font-weight: bold;
-    color: #005e96;
-    span {
-      background: linear-gradient(transparent 70%, #e5bb09 70%);
-    }
-    @media screen and (max-width: 767px) {
-      font-size: 25px;
-    }
-  }
+
   img {
     height: 700px;
     margin-right: 30px;
@@ -92,8 +84,21 @@ const StyledHomeTop = styled.div`
 
 const StyledTextArea = styled.div`
   margin-top: 50px;
+  h1 {
+    font-size: 45px;
+    font-weight: bold;
+    color: #005e96;
+
+    span {
+      background: linear-gradient(transparent 70%, #e5bb09 70%);
+    }
+    @media screen and (max-width: 767px) {
+      font-size: 25px;
+    }
+  }
   p {
     font-size: 18px;
+
     span {
       text-decoration: #e3bf00 wavy underline;
       -webkit-text-decoration: #e3bf00 wavy underline;
@@ -104,9 +109,11 @@ const StyledTextArea = styled.div`
   }
   img {
     position: absolute;
-    opacity: 0.15;
-    z-index: -3;
+    opacity: 0.1;
+    z-index: 0;
+
     top: 70px;
+    right: 0px;
     @media screen and (max-width: 767px) {
       display: none;
     }
@@ -118,10 +125,12 @@ const StyledButtonArea = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
   button {
     width: 200px;
     height: 50px;
     background-color: #87ffff;
+    z-index: 2;
     cursor: pointer;
     box-shadow: 2px 4px 7px black;
     font-weight: bold;

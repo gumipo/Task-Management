@@ -12,6 +12,11 @@ export const UsersReducer = (state = initialState.users, action) => {
       return {
         ...action.payload,
       };
+    case Actions.FETCH_USER_TASK:
+      return {
+        ...state,
+        usertask: action.payload,
+      };
     default:
       return state;
   }

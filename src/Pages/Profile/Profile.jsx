@@ -9,14 +9,29 @@ const Profile = () => {
   return (
     <StyledSection>
       <p>まだプロフィールが作成されていません</p>
-      <button onClick={() => dispatch(push("/profile/create"))}>
+      <StyledButton onClick={() => dispatch(push("/profile/create"))}>
         プロフィールを作成する
-      </button>
+      </StyledButton>
     </StyledSection>
   );
 };
 export default Profile;
 
 const StyledSection = styled.section`
-  margin: 100px 300px;
+  width: 500px;
+  margin: 70px auto 0 auto;
+  display: flex;
+  padding: 200px 0 200px 0;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  transform: translateX(150px);
+`;
+
+const StyledButton = styled.button`
+  width: 200px;
+  height: 50px;
+  background-color: gray;
+  color: white;
+  border-radius: 10px;
 `;

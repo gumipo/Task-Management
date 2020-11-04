@@ -104,13 +104,13 @@ const SignUp = () => {
 export default SignUp;
 
 const StyledSignUp = styled.section`
-  margin: 70px auto;
+  margin: 50px auto 0 auto;
   padding-top: 30px;
   text-align: center;
 
   p {
     width: 320px;
-    margin: 15px auto;
+    margin: 15px auto 0 auto;
     cursor: pointer;
     :hover {
       color: blue;
@@ -143,7 +143,7 @@ const StyledSignUp = styled.section`
 const StyledTextBox = styled.div`
   width: 500px;
   margin: 0 auto;
-  height: 700px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
