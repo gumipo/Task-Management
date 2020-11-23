@@ -28,6 +28,37 @@ export const saveUserTask = (title, descriptions) => {
   };
 };
 
+export const chageStatusTask = (id, title, descriptions) => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid;
+    console.log(id);
+
+    const timestamp = FirebaseTimestamp.now().toDate();
+
+    const userTask = {
+      updated_at: timestamp,
+      title: title,
+      descriptions: descriptions,
+    };
+    db.collection("users")
+      .doc(uid)
+      .collection("usertask")
+      .doc(id)
+      .set(userTask, { merge: true });
+  };
+};
+
+export const changeCompleteTask = (id) => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid;
+    const userTaskRef = db
+      .collection("users")
+      .doc(uid)
+      .collection("usertask")
+      .doc(id);
+  };
+};
+
 //タスクを取り出す
 export const fetchUserTask = (usertask) => {
   return async (dispatch) => {
@@ -148,6 +179,11 @@ export const signUp = (username, email, password, confirmPassword) => {
               dispatch(push("/"));
             });
         }
+      })
+      .catch(() => {
+        alert(
+          "すでに登録済みのメールアドレスです他のSNSアカウントをお確かめください"
+        );
       });
   };
 };
@@ -211,6 +247,11 @@ export const twitterLogin = () => {
           .then(() => {
             dispatch(push("/profile/create"));
           });
+      })
+      .catch(() => {
+        alert(
+          "すでに登録済みのメールアドレスです他のSNSアカウントをお確かめください"
+        );
       });
   };
 };
@@ -251,6 +292,11 @@ export const googleLogin = () => {
           .then(() => {
             dispatch(push("/profile/create"));
           });
+      })
+      .catch(() => {
+        alert(
+          "すでに登録済みのメールアドレスです他のSNSアカウントをお確かめください"
+        );
       });
   };
 };
@@ -291,6 +337,11 @@ export const gitHubLogin = () => {
           .then(() => {
             dispatch(push("/profile/create"));
           });
+      })
+      .catch(() => {
+        alert(
+          "すでに登録済みのメールアドレスです他のSNSアカウントをお確かめください"
+        );
       });
   };
 };

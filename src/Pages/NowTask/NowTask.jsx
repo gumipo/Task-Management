@@ -15,9 +15,11 @@ const NowTask = () => {
       {usertask.length > 0 ? (
         usertask.map((task) => (
           <NowTaskItem
+            usertask={usertask}
             title={task.title}
             descriptions={task.descriptions}
             key={task.title}
+            id={task.usertaskId}
           />
         ))
       ) : (

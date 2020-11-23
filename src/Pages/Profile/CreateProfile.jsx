@@ -47,7 +47,6 @@ const CreateProfile = () => {
             <StyledChangeIcon>
               <PhotoCameraIcon />
             </StyledChangeIcon>
-            <input type="file" id="image" onChange={(e) => changeIcon(e)} />
           </label>
         </UserImage>
 

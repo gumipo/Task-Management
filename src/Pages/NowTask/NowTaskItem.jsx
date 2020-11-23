@@ -2,31 +2,39 @@ import React from "react";
 import styled from "styled-components";
 import NowDescriptionItem from "./NowDescriptionItem";
 
-const NowTaskItem = ({ title, descriptions }) => {
+const NowTaskItem = ({ usertask, title, descriptions, id }) => {
   return (
     <StyledUserTask>
       <StyledNowTaskTitle>{title}</StyledNowTaskTitle>
-      <h2>未完了タスク</h2>
+      <StyledTaskWrap>未完了タスク</StyledTaskWrap>
       {descriptions.length > 0 &&
         descriptions.map(
           (description, index) =>
             !description.isCompleted && (
               <NowDescriptionItem
+                title={title}
+                usertask={usertask}
+                descriptions={descriptions}
                 time={description.time}
                 text={description.text}
+                id={id}
                 index={index}
               />
             )
         )}
-      <h2>完了タスク</h2>
+      <StyledTaskWrap>完了タスク</StyledTaskWrap>
       {descriptions.length > 0 &&
         descriptions.map(
           (description, index) =>
             description.isCompleted && (
               <NowDescriptionItem
+                title={title}
+                usertask={usertask}
+                descriptions={descriptions}
                 time={description.time}
                 text={description.text}
                 index={index}
+                id={id}
               />
             )
         )}
@@ -49,8 +57,6 @@ const StyledNowTaskTitle = styled.h1`
   color: white;
 `;
 
-const StyledTaskDescription = styled.div`
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-around;
+const StyledTaskWrap = styled.div`
+  text-align: center;
 `;
