@@ -1,0 +1,63 @@
+body {
+  background-color: rgba(0, 255, 43, 0.08);
+}
+
+/*********** Module Spacer ***********/
+.module-spacer--extra-extra-small {
+  height: 12px;
+}
+.module-spacer--extra-small {
+  height: 12px;
+}
+.module-spacer--small {
+  height: 20px;
+}
+.module-spacer--medium {
+  height: 32px;
+}
+
+@media screen and (min-width: 767px) {
+  /*********** Module Spacer ***********/
+  .module-spacer--extra-extra-small {
+    height: 16px;
+  }
+  .module-spacer--extra-small {
+    height: 20px;
+  }
+  .module-spacer--small {
+    height: 32px;
+  }
+}
+
+.btn {
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+}
+.big_btn {
+  width: 200px;
+  height: 70px;
+  border-radius: 10px;
+}
+
+.u-background_green {
+  background-color: greenyellow;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+input::placeholder {
+  font-size: 16px;
+}
+
+.p-grid__row {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+button:hover {
+  opacity: 0.7;
+}
